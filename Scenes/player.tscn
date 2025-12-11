@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://blcrj01tfyl8o"]
+[gd_scene load_steps=7 format=3 uid="uid://blcrj01tfyl8o"]
 
 [ext_resource type="Script" uid="uid://csmbbuy3rp23b" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dqul56jm1y1k4" path="res://New Piskel-8.png" id="2_cvnsp"]
@@ -20,7 +20,10 @@ animations = [{
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cvnsp"]
 polygon = PackedVector2Array(-2, -2, -2, 2, 2, 2, 2, -2)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5aa"]
+size = Vector2(5, 5)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_cvnsp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -35,3 +38,8 @@ frame_progress = 0.1590646
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_cvnsp")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_6t5aa")

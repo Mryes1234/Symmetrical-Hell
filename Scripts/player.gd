@@ -7,11 +7,16 @@ var yspeed = 100
 var max_health: int = 10
 var health: int = max_health
 var damage_amount: int = 1
+var timer = null
 
 signal health_changed(new_health: float, max_health: float)
 signal player_died
 
 func _ready():
+	timer = Timer.new()
+	timer.set_one_shot(false)
+	timer.set_wait_time(0.01) # 0.25 is just an example. 
+	add_child(timer)
 	health = max_health
 	collision_layer = 1
 
@@ -46,7 +51,7 @@ func die() -> bool:
 
 	return true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if xdirection:
 		velocity.x = xdirection * xspeed
 	else:
