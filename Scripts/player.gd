@@ -15,16 +15,11 @@ signal player_died
 func _ready():
 	timer = Timer.new()
 	timer.set_one_shot(false)
-	timer.set_wait_time(0.01) # 0.25 is just an example. 
+	timer.set_autostart(true)
+	timer.set_wait_time(0.0000001)
 	add_child(timer)
 	health = max_health
 	collision_layer = 1
-
-func _on_Area2D_area_entered(area):
-	if area.is_in_group("Player"):
-		print("Something")
-		area.apply_damage(damage_amount)
-		print("Something4")
 
 func take_damage(amount: float) -> bool:
 	health -= amount
@@ -65,3 +60,7 @@ func _physics_process(_delta):
 	xdirection = Input.get_axis("ui_left", "ui_right")
 	ydirection = Input.get_axis("ui_up", "ui_down")
 	move_and_slide()
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	take_damage(damage_amount)

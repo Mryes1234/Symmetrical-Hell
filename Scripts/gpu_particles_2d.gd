@@ -1,9 +1,0 @@
-extends GPUParticles2D
-
-
-
-func _on_damage_timer_timeout():
-	var bodies = $DamageArea2D.get_overlapping_bodies()
-	for body in bodies:
-		if body.has_method("take_damage"):
-			body.take_damage(5)

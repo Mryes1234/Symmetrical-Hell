@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=4 uid="uid://caq6ldqwdb71p"]
+[gd_scene load_steps=11 format=4 uid="uid://caq6ldqwdb71p"]
 
 [ext_resource type="Texture2D" uid="uid://inc0q666e515" path="res://New Piskel-2.png" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://blcrj01tfyl8o" path="res://Scenes/player.tscn" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cl0xul0anfe03" path="res://Scenes/player_2.tscn" id="3_jjvhh"]
-[ext_resource type="Script" uid="uid://o83xjcna7nqr" path="res://Scripts/gpu_particles_2d.gd" id="4_jjvhh"]
-[ext_resource type="Script" uid="uid://c23qug10cdhhx" path="res://Scenes/area_2d_timer.gd" id="4_kry3j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
 size = Vector2(5, 221)
@@ -2075,17 +2073,8 @@ tile_size = Vector2i(1, 1)
 physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_bo1nx")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8gbba"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(193, 1.5, 1)
-gravity = Vector3(0, 30, 0)
-hue_variation_min = -0.18000002
-hue_variation_max = -0.06000002
-collision_mode = 2
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
-size = Vector2(385, 212)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jjvhh"]
+polygon = PackedVector2Array(-198, 105, 200, 105, 200, 112, -199, 112)
 
 [node name="Main" type="Node2D"]
 
@@ -2112,31 +2101,25 @@ tile_map_data = PackedByteArray("AAB6/5D/AgAAAAAAAAB6/5H/AgAAAAEAAAB6/5L/AgAAAAI
 tile_set = SubResource("TileSet_jjvhh")
 physics_quadrant_size = 1
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+physics_interpolation_mode = 1
+position = Vector2(0, -109)
+amount = 30
+speed_scale = 0.2
+emission_shape = 3
+emission_rect_extents = Vector2(193, 1)
+color = Color(0, 0.8980392, 0.8235294, 1)
+hue_variation_min = -0.22
+hue_variation_max = 0.22
+
 [node name="Player" parent="." instance=ExtResource("2_8gbba")]
 position = Vector2(-60, 0)
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Player"]
-position = Vector2(60, -109)
-amount = 40
-sub_emitter = NodePath(".")
-lifetime = 4.13
-collision_base_size = 2.0
-visibility_rect = Rect2(-100, 50, 200, 100)
-trail_enabled = true
-trail_lifetime = 0.09
-process_material = SubResource("ParticleProcessMaterial_8gbba")
-script = ExtResource("4_jjvhh")
-
-[node name="Area2D2" type="Area2D" parent="Player"]
-position = Vector2(60, -109)
-script = ExtResource("4_kry3j")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D2"]
-position = Vector2(0, 109)
-shape = SubResource("RectangleShape2D_kry3j")
 
 [node name="Player 2" parent="." instance=ExtResource("3_jjvhh")]
 position = Vector2(60, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.9, 2.9)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_jjvhh")

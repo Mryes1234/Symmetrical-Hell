@@ -15,12 +15,6 @@ func _ready():
 	health = max_health
 	collision_layer = 1
 
-func _on_Area2D_area_entered(area):
-	if area.is_in_group("Player"):
-		print("Something")
-		area.apply_damage(damage_amount)
-		print("Something4")
-
 func take_damage(amount: float) -> bool:
 	health -= amount
 	print("Something1")
@@ -46,7 +40,7 @@ func die() -> bool:
 
 	return true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if xdirection:
 		velocity.x = xdirection * xspeed
 	else:
