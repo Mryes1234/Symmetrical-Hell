@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://caq6ldqwdb71p"]
+[gd_scene load_steps=14 format=4 uid="uid://caq6ldqwdb71p"]
 
 [ext_resource type="Texture2D" uid="uid://inc0q666e515" path="res://New Piskel-2.png" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://d1td5md8pehne" path="res://Scenes/main.gd" id="1_kry3j"]
 [ext_resource type="PackedScene" uid="uid://blcrj01tfyl8o" path="res://Scenes/player.tscn" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cl0xul0anfe03" path="res://Scenes/player_2.tscn" id="3_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://cog245s6blpau" path="res://Scenes/particle.tscn" id="4_jjvhh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
 size = Vector2(5, 221)
@@ -2076,7 +2078,11 @@ sources/2 = SubResource("TileSetAtlasSource_bo1nx")
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jjvhh"]
 polygon = PackedVector2Array(-198, 105, 200, 105, 200, 112, -199, 112)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
+size = Vector2(386, 6)
+
 [node name="Main" type="Node2D"]
+script = ExtResource("1_kry3j")
 
 [node name="Walls" type="Area2D" parent="."]
 
@@ -2101,17 +2107,6 @@ tile_map_data = PackedByteArray("AAB6/5D/AgAAAAAAAAB6/5H/AgAAAAEAAAB6/5L/AgAAAAI
 tile_set = SubResource("TileSet_jjvhh")
 physics_quadrant_size = 1
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-physics_interpolation_mode = 1
-position = Vector2(0, -109)
-amount = 30
-speed_scale = 0.2
-emission_shape = 3
-emission_rect_extents = Vector2(193, 1)
-color = Color(0, 0.8980392, 0.8235294, 1)
-hue_variation_min = -0.22
-hue_variation_max = 0.22
-
 [node name="Player" parent="." instance=ExtResource("2_8gbba")]
 position = Vector2(-60, 0)
 
@@ -2123,3 +2118,14 @@ zoom = Vector2(2.9, 2.9)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_jjvhh")
+
+[node name="Particle" parent="." instance=ExtResource("4_jjvhh")]
+position = Vector2(-160, -99)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 103)
+shape = SubResource("RectangleShape2D_kry3j")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
