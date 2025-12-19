@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=4 uid="uid://caq6ldqwdb71p"]
 
 [ext_resource type="Texture2D" uid="uid://inc0q666e515" path="res://New Piskel-2.png" id="1_jjgbg"]
-[ext_resource type="Script" uid="uid://d1td5md8pehne" path="res://Scenes/main.gd" id="1_kry3j"]
+[ext_resource type="Script" uid="uid://d1td5md8pehne" path="res://Scripts/main.gd" id="1_kry3j"]
 [ext_resource type="PackedScene" uid="uid://blcrj01tfyl8o" path="res://Scenes/player.tscn" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cl0xul0anfe03" path="res://Scenes/player_2.tscn" id="3_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cog245s6blpau" path="res://Scenes/particle.tscn" id="4_jjvhh"]
@@ -2079,7 +2079,7 @@ sources/2 = SubResource("TileSetAtlasSource_bo1nx")
 polygon = PackedVector2Array(-198, 105, 200, 105, 200, 112, -199, 112)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
-size = Vector2(386, 6)
+size = Vector2(386, 3)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kry3j")
@@ -2119,13 +2119,61 @@ zoom = Vector2(2.9, 2.9)
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_jjvhh")
 
-[node name="Particle" parent="." instance=ExtResource("4_jjvhh")]
-position = Vector2(-160, -99)
+[node name="Node" type="Node" parent="."]
+
+[node name="Particle" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(-190, -99)
+
+[node name="Particle3" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(-109, -99)
+
+[node name="Particle4" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(-85, -99)
+
+[node name="Particle5" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(-64, -99)
+
+[node name="Particle8" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(48, -99)
+
+[node name="Particle2" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(-130, -99)
+
+[node name="Particle9" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(-19, -99)
+
+[node name="Particle10" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(5, -99)
+
+[node name="Particle6" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(-40, -99)
+
+[node name="Particle7" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(24, -99)
+
+[node name="Particle11" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(69, -99)
+
+[node name="Particle12" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(93, -99)
+
+[node name="Particle13" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(114, -99)
+
+[node name="Particle14" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(138, -99)
+
+[node name="Particle15" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(159, -99)
+
+[node name="Particle16" parent="Node" instance=ExtResource("4_jjvhh")]
+position = Vector2(190, -99)
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 103)
+position = Vector2(0, 104.5)
 shape = SubResource("RectangleShape2D_kry3j")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

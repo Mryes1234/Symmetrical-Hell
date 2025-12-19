@@ -7,11 +7,17 @@ var yspeed = 100
 var max_health: int = 10
 var health: int = max_health
 var damage_amount: int = 1
+var timer = null
 
 signal health_changed(new_health: float, max_health: float)
 signal player_died
 
 func _ready():
+	timer = Timer.new()
+	timer.set_one_shot(false)
+	timer.set_autostart(true)
+	timer.set_wait_time(0.0000001)
+	add_child(timer)
 	health = max_health
 	collision_layer = 1
 
@@ -54,3 +60,7 @@ func _physics_process(_delta):
 	xdirection = Input.get_axis("ui_right", "ui_left")
 	ydirection = Input.get_axis("ui_up", "ui_down")
 	move_and_slide()
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	take_damage(damage_amount)

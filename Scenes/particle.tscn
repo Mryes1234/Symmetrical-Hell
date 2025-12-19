@@ -11,7 +11,7 @@ size = Vector2(3.625, 3.5)
 
 [node name="Particle" type="RigidBody2D"]
 mass = 0.205
-gravity_scale = 0.266
+gravity_scale = 0.046
 script = ExtResource("1_u2rni")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
